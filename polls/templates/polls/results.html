@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html>
-	<title>POLL APP</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
-<body>
-	<div class="container jumbotron">
-    <h1>{{ question.question_text }}</h1>
+<% extends "base.html" %>
+
+<% block content %>
+
+    <h1>{{ question.snippet }}</h1>
 
 <ul>
 {% for choice in question.choice_set.all %}
@@ -18,9 +11,5 @@
 </ul>
 
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
-	</div>
-	<footer>
-    <p align="center"> Copyright © All Rights Reserved by the Company <br> </p>
- 	</footer>
-</body>
-</html>
+
+<% endblock %>
