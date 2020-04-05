@@ -8,20 +8,22 @@ from .forms import UserRegistrationForm
 def home(request):
     return render(request, 'accounts/home.html')
 def signup_view(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            userObj = form.cleaned_data
-            username = userObj['username']
-            email =  userObj['email']
-            password =  userObj['password']
-            if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
-                User.objects.create_user(username, email, password)
-                user = authenticate(username = username, password = password)
-                login(request, user)
-                return HttpResponseRedirect("/home")
-            else:
-                raise forms.ValidationError('Looks like a username with that email or password already exists')
-    else:
-        form = UserRegistrationForm()
-    return render(request, 'accounts/signup.html', {'user_form' : form})
+        if request.user.is_authenticated:
+            return HttpResponseRedirect("/home")
+        if request.method == 'POST':
+            form = UserRegistrationForm(request.POST)
+            if form.is_valid():
+                userObj = form.cleaned_data
+                username = userObj['username']
+                email =  userObj['email']
+                password =  userObj['password']
+                if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
+                    User.objects.create_user(username, email, password)
+                    user = authenticate(username = username, password = password)
+                    login(request, user)
+                    return HttpResponseRedirect("/home")
+                else:
+                    raise forms.ValidationError('Looks like a username with that email or password already exists')
+        else:
+            form = UserRegistrationForm()
+        return render(request, 'accounts/signup.html', {'user_form' : form})

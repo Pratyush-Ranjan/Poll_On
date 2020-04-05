@@ -2,11 +2,17 @@
 {% block title %} Create an	account{% endblock %}
 
 {% block content %}
-	<h1>Create an account </h1>
+	<h3 class="text-center"> Create an account</h3>
+	<hr>
 	<p>please sign up using the following form : </p>
-	<form action="" method="post">
-		{{user_form.as_p}}
+	<div class="registration-form">
+	<form action="" method="post" class="form-horizontal">
 		{% csrf_token %}
-		<p><input type="submit" value="signup"></p>
-	</form>
+    {{ user_form.as_p}}
+<br>
+<div class="text-center">
+      <button class="btn btn-success" type="submit">Register</button>
+  </div>
+  </form>
+</div>
 {% endblock %}
