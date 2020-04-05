@@ -1,6 +1,6 @@
-<% extends "base.html" %>
+{% extends "base.html" %}
 
-<% block content %>
+{% block content %}
 
     <h1>{{ question.snippet }}</h1>
 
@@ -12,4 +12,4 @@
 
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
 
-<% endblock %>
+{% endblock %}
