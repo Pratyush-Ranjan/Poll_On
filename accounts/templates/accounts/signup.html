@@ -8,7 +8,7 @@
 	<div class="registration-form">
 	<form action="" method="post" class="form-horizontal">
 		{% csrf_token %}
-    {{ user_form.as_p}}
+    {{ user_form.as_ul}}
 <br>
 <div class="text-center">
       <button class="btn btn-success" type="submit">Register</button>

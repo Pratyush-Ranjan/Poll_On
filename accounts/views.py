@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django import forms
 from .forms import UserRegistrationForm
@@ -23,7 +23,10 @@ def signup_view(request):
                     login(request, user)
                     return HttpResponseRedirect("/home")
                 else:
-                    raise forms.ValidationError('Looks like a username with that email or password already exists')
+                    raise forms.ValidationError('Looks like a user with that email or username already exists')
         else:
             form = UserRegistrationForm()
         return render(request, 'accounts/signup.html', {'user_form' : form})
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect("/")
