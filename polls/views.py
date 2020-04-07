@@ -61,3 +61,42 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+# class VoteView(generic.View):
+
+#     def get_queryset(self, choice_id):
+#         return Choice.objects.get(pk=choice_id)
+
+#     def post(self, request, pk):
+#         question_id = pk
+#         choice_id = request.POST.get('choice', None)
+#         try:
+#             queryset = self.get_queryset(choice_id)
+#         except (KeyError, Choice.DoesNotExist):
+#             return redirect('polls:detail', pk=question_id)
+#         else:
+#             queryset.votes += 1
+#             queryset.save()
+#             return redirect('polls:vote_result', pk=question_id)
+
+# class ResultsView(TemplateResponseMixin, generic.View):
+#     template_name = 'polls/results.html'
+
+#     def get_queryset(self, question_id):
+#         return Question.objects.get(pk=question_id)
+
+#     def get(self, request, pk):
+#         queryset = self.get_queryset(pk)
+#         context = {'question': queryset}
+#         return self.render_to_response(context)
+
+
+# class SwitchboardView(generic.View):
+#     def get(self, request, pk):
+#         view = ResultsView.as_view()
+#         return view(request, pk)
+
+#     def post(self, request, pk):
+#         view = VoteView.as_view()
+#         return view(request, pk)
+
