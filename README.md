@@ -1,2 +1,2 @@
-# django_poll_App
+# django_App
 Django project
